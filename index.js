@@ -67,8 +67,7 @@ function processLength(list, callback) {
  * should return 'barbar'.
 */
 function processLastItem(stringList, callback){
-  const last = stringList[-1];
-  return callback(last);
+  return callback(stringList);
 }
 
 /**
@@ -112,8 +111,9 @@ function processSum(num1,num2 ,callback){
  * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct() {
-  /* CODE HERE */
+function processProduct(num1,num2, callback){
+  const product = num1*num2;
+  return callback(product);
 }
 
 /**
@@ -157,8 +157,8 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * 
  * [2] Invoking `lowerCaseStrings` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function lowerCaseStrings(/* code here */) {
-  /* code here */
+function lowerCaseStrings(strings) {
+  return strings.foreach(string => {string.toLowercase()});
 }
 
 /**
@@ -176,8 +176,13 @@ function lowerCaseStrings(/* code here */) {
  * 
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
 */
-function isItAnApple(/* code here */) {
-  /* code here */
+function isItAnApple(strings) {
+  strings.map(string => {
+    if (string === "apple") {
+      return "true";
+    } else {
+      return "false";
+    }
 }
 
 /**
