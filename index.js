@@ -48,8 +48,8 @@ function processFirstItem(stringList, callback) {
  * [2] Invoking `processLength` passing `[]` and `(num) => "There are " + num`,
  * should return "There are 0".
 */
-function processLength(/* CODE HERE */) {
-  /* CODE HERE */
+function processLength(list, callback) {
+  return callback(list.length);
 }
 
 /**
@@ -66,8 +66,8 @@ function processLength(/* CODE HERE */) {
  * Invoking `processLastItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'barbar'.
 */
-function processLastItem(/* CODE HERE */) {
-  /* CODE HERE */
+function processLastItem(stringList, callback){
+  return callback(stringList);
 }
 
 /**
@@ -88,8 +88,9 @@ function processLastItem(/* CODE HERE */) {
  * [2] Invoking `processSum` passing `-5`, '-1', and `(num) => num + 1000`,
  * should return 994.
 */
-function processSum(/* CODE HERE */) {
-  /* CODE HERE */
+function processSum(num1,num2 ,callback){
+  let sum = num1 + num2;
+  return callback(sum);
 }
 
 /**
@@ -110,8 +111,9 @@ function processSum(/* CODE HERE */) {
  * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct(/* CODE HERE */) {
-  /* CODE HERE */
+function processProduct(num1,num2, callback){
+  const product = num1*num2;
+  return callback(product);
 }
 
 /**
@@ -155,8 +157,8 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * 
  * [2] Invoking `lowerCaseStrings` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function lowerCaseStrings(/* code here */) {
-  /* code here */
+function lowerCaseStrings(strings) {
+  return strings.foreach((string) => {string.toLowercase()});
 }
 
 /**
@@ -174,8 +176,13 @@ function lowerCaseStrings(/* code here */) {
  * 
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
 */
-function isItAnApple(/* code here */) {
-  /* code here */
+function isItAnApple(strings) {
+  strings.map((string) => {
+    if (string === "apple") {
+      return "true";
+    } else {
+      return "false";
+    }
 }
 
 /**
@@ -194,15 +201,15 @@ function isItAnApple(/* code here */) {
  * 
  * [2] Invoking `removeApple` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function removeApple(/* code here */) {
-  /* code here */
+function removeApple(strings) {
+  return strings.filter((string) => {return string !== "apple";} );
 }
 
 /**
  * ### Challenge `stringSmash`
  * 
  * @instructions
- * Implement this function using reduce(). Do NOT use any other array methods.
+ * Implement t his function using reduce(). Do NOT use any other array methods.
  * 
  * @param strings an array of strings.
  * @returns a string with all entries in `strings` combined together.
@@ -213,8 +220,8 @@ function removeApple(/* code here */) {
  * 
  * [2] Invoking `stringSmash` with `['a', 'b', 'c' ]` will return `abc`.
 */
-function stringSmash(/* code here */) {
-  /* code here */
+function stringSmash(strings) {
+  strings.reduce((total, string) =>{return total + string;}, 0);
 }
 
 // A local community center is holding a fund raising 5k fun run and has invited
@@ -232,8 +239,8 @@ function stringSmash(/* code here */) {
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
+function getFullNames(runners) {
+  return runners.forEach((runner) => {return `${runner.last_name}, ${runner.first_name}`;});
 }
 
 /**
@@ -248,8 +255,8 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
-function firstNamesAllCaps(/* CODE HERE */) {
-  /* CODE HERE */
+function firstNamesAllCaps(runners) {
+  return runners.map((runner)=>{return runner.first_name.toUppercase();})
 }
 
 /**
@@ -266,8 +273,8 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
-  /* CODE HERE */
+function getRunnersByTShirtSize(runners) {
+  return runners.filter((size)=>{runners.tshirt === size});
 }
 
 /**
@@ -281,8 +288,8 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
-  /* CODE HERE */
+function tallyUpDonations(runners) {
+  return runners.reduce((total, runner) => {return total + runner.donation;});
 }
 
 /////////////// CLOSURES ///////////////
@@ -295,11 +302,16 @@ function tallyUpDonations(/* CODE HERE */) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ * In counter1, count is in local scope of the counterMaker function and in counter2 count is in the globle
+ * state.
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ * Counter2 uses closer and you can tell becuase the count variable is accessed outside of the function's state.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *When you call the counter2 function it will add to count and return a value but countermaker funtion
+ will add to count but will not return a value but olny returns a function that adds to count, so counter2
+ would be better for changing the state with a button or keeping track of someting.
 */
 
 // counter1 code
@@ -340,8 +352,12 @@ function counter2() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
+function counterMakerWithLimit(limit) {
+  if (count < limit) {
+    return count++;
+  } else {
+    return count = 0;
+  }
 }
 
 /////////////// END OF CHALLENGE ///////////////
